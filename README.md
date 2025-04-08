@@ -3,9 +3,8 @@
 ## Pixel-in-Pixel Net: Towards Efficient Facial Landmark Detection in the Wild
 
 ### Notes
-
-* Used datasets are `300W` or `300W+WFLW`
-* Download pretrained weights for training, see `Pretrained weights`
+* Used datasets are `300W` or `300W+WFLW` + `42dot` + `PHA`
+* Download datasets: /home/max/DELTAX_PROJECTS/pha-dms-drowsiness-train/datasets
 * Trained was runed on 4 GPUs (be careful with accumulation)
 * Train code was modified to detect only eye landmarks, but it can be easily returned to the default version
 
@@ -45,16 +44,6 @@ python main.py --test --test-onnx --exp <expID|PATH.pt>
 ```bash
 python demo.py
 ```
-
-### Results
-
-| Backbone | Epochs |  NME  | NME (300W)* | NME (300W+WFLW)* |                                 Pretrained weights                                 |
-| :------: | :----: | :---: | :---------: | :--------------: | :--------------------------------------------------------------------------------: |
-| IRNet18  |  120   | 3.27  |   3.2585    |      3.2705      | [model](https://github.com/jahongir7174/PIPNet/releases/download/v0.0.1/IR18.pth)  |
-| IRNet50  |  120   | 3.11  |   3.1746    |      3.1127      | [model](https://github.com/jahongir7174/PIPNet/releases/download/v0.0.1/IR50.pth)  |
-| IRNet100 |  120   | 3.08  |   3.1458    |      3.0923      | [model](https://github.com/jahongir7174/PIPNet/releases/download/v0.0.1/IR100.pth) |
-
-![Alt Text](./assets/demo.gif)
 
 ### 300W Dataset Preparation
 
@@ -124,88 +113,7 @@ python demo.py
 |  184  |  120   |  256  | 5E-4  | 1.8799 | 300W-WFLW-42dot-PHA-REGR-ReLu-RegnetX800 |
 
 
-```text
-TARGET:
-    NME = 1.7%
-
-REFERENCES 300W-WFLW
-    Epoch=120   deep=18     NME=3.2685  EXP=018     ***   4-GPUs
-    Epoch=120   deep=50     NME=3.1148  EXP=050     ***   4-GPUs
-    Epoch=120   deep=100    NME=3.0838  EXP=100     ***   4-GPUs
-
-REIMPLEMENTATION 300W-WFLW
-    DEFAULT:
-    Epoch=120   deep=18     NME=3.2705  EXP=0       ***   4-GPUs
-    Epoch=120   deep=50     NME=3.1127  EXP=1       ***   4-GPUs
-    Epoch=120   deep=100    NME=3.0923  EXP=2       ***   4-GPUs
-
-    reg: 1.0 = 1.7969
-    reg: 2.5 = 1.7889
-    reg: 1.8 = 1.7833
-    reg: 1.5 = 1.7789
-    reg: 2.0 = 1.7712   !!!
-
-EYES MODIFICATION:  # Implementation: Defaul <----> Drowsiness
-    args.yaml
-        num_nb: 5                                   # number of neighbors   ERRORS: [0, 12]-train | [1, 2]-test | failed
-        num_lms: 12                                 # number of landmarks
-        selected_index: *flip_index_eyes_anchor     # [flip_index_anchor, flip_index_eyes_anchor]
-
-RECOMMENDED:
-    1. Use deep=18              --> light and show almost similar performance to heavy models
-    2. Use 12 eyes landmarks    --> drowsiness implementation
-    3. Use 5 neighbors          --> each eye has 6 landmarks
-    4. Use reg: 2.0             --> more focus on coordinate regression
-
-
-Architectures:
-    MobileNet-V2
-        PT-NME:     1.8334
-        ONNX-NME:   1.8332
-
-    MobileNet-V3-Large
-        PT-NME:     1.7922
-        ONNX-NME:   1.7926
-
-    MobileOne-S1
-        PT-NME:     1.8151
-        ONNX-NME:   1.8142
-
-
-Mean-lmk:
-300W-WFLF-lmk12 = 300W
-    1.7712
-    1.7714
-
-300W-WFLF-lmk12 = 300W-WFLF
-    1.7737
-    1.7736
-
-300W-WFLF-lmk12 = 300W-WFLF-lmk12
-    1.7737
-    1.7736
-
-300W-WFLF-lmk12-42dot = 300W
-    1.8005
-    1.8014
-
-300W-WFLF-lmk12-42dot = 300W-WFLF
-    1.828
-    1.8282
-
-300W-WFLF-lmk12-42dot = 300W-WFLF-lmk12-42dot
-    1.8134
-    1.813
-```
-
-### TODO
-
-* [ ] **GSSL architecture**
-
 ### References
 
 * [**arXiv article: Pixel-in-Pixel Net**](https://arxiv.org/abs/2003.03771)
 * [**PIPNet - Original**](https://github.com/jhb86253817/PIPNet)
-* [**PIPNet - Jahongir**](https://github.com/jahongir7174/PIPNet)
-* [**PIPNet - Shohruh**](https://github.com/Shohruh72/PIPNet)
-* [**PIPNet - Shohruh-V2**](https://github.com/Shohruh72/LitePIPNet)
