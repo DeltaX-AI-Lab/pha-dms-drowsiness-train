@@ -38,12 +38,6 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 bash main.sh 4 --train --test --test-onnx --epochs 
 python main.py --test --test-onnx --exp <expID|PATH.pt>
 ```
 
-### Demo
-
-```bash
-python demo.py
-```
-
 ### 300W Dataset Preparation
 
 1. **Download** [`300W`](https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/) datasets
