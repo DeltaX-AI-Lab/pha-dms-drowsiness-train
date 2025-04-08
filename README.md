@@ -29,7 +29,7 @@ pip install opencv-python timm onnx onnxruntime-gpu onnx-simplifier onnxoptimize
 ### Train
 
 ```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 bash main.sh 4 --train --test --test-onnx --epochs 120 --batch-size 32 --input-size 256
+CUDA_VISIBLE_DEVICES=0,1,2,3 bash main.sh 4 --train --test --test-onnx --epochs 120 --batch-size 256 --input-size 192
 ```
 
 ### Test
@@ -82,28 +82,29 @@ python main.py --test --test-onnx --exp <expID|PATH.pt>
 
 ### Drowsiness Development Notes
 
-|  EXP  | Epochs |  BS   |  LR   |  NME   |           NOTE            |
-| :---: | :----: | :---: | :---: | :----: | :-----------------------: |
-|  000  |  120   |  16   | 5E-4  | 1.7903 |         300W-WFLW         |
-|  001  |  120   |  32   | 5E-4  | 1.7646 |         300W-WFLW         |
-|  002  |  120   |  64   | 5E-4  | 1.7590 |         300W-WFLW         |
-|  003  |  120   |  128  | 5E-4  | 1.7902 |         300W-WFLW         |
-|  014  |  120   |  256  | 5E-4  | 1.7844 |         300W-WFLW         |
-|  004  |  120   |  16   | 5E-4  | 1.8076 |      300W-WFLW-42dot      |
-|  005  |  120   |  32   | 5E-4  | 1.7809 |      300W-WFLW-42dot      |
-|  006  |  120   |  64   | 5E-4  | 1.7903 |      300W-WFLW-42dot      |
-|  007  |  120   |  128  | 5E-4  | 1.7538 |      300W-WFLW-42dot      |
-|  013  |  120   |  256  | 5E-4  | 1.7726 |      300W-WFLW-42dot      |
-|  008  |  120   |  16   | 5E-4  | 1.8249 |   300W-WFLW-42dot-ReLu    |
-|  009  |  120   |  32   | 5E-4  | 1.7997 |   300W-WFLW-42dot-ReLu    |
-|  010  |  120   |  64   | 5E-4  | 1.8086 |   300W-WFLW-42dot-ReLu    |
-|  011  |  120   |  128  | 5E-4  | 1.7981 |   300W-WFLW-42dot-ReLu    |
-|  012  |  120   |  256  | 5E-4  | 1.7819 |   300W-WFLW-42dot-ReLu    |
-|  015  |  120   |  256  | 5E-4  | 1.7819 | 300W-WFLW-42dot-ITG-ReLu  |
-|  016  |  120   |  256  | 5E-4  | 1.7726 | 300W-WFLW-42dot-ITG-PReLu |
-|  000  |  120   |  256  | 5E-4  | 1.9700 | 300W-WFLW-42dot-REGR-ReLu |
-|  181  |  120   |  256  | 5E-4  | 1.9469 | 300W-WFLW-42dot-PHA-REGR-ReLu |
+|  EXP  | Epochs |  BS   |  LR   |  NME   |                   NOTE                   |
+| :---: | :----: | :---: | :---: | :----: | :--------------------------------------: |
+|  000  |  120   |  16   | 5E-4  | 1.7903 |                300W-WFLW                 |
+|  001  |  120   |  32   | 5E-4  | 1.7646 |                300W-WFLW                 |
+|  002  |  120   |  64   | 5E-4  | 1.7590 |                300W-WFLW                 |
+|  003  |  120   |  128  | 5E-4  | 1.7902 |                300W-WFLW                 |
+|  014  |  120   |  256  | 5E-4  | 1.7844 |                300W-WFLW                 |
+|  004  |  120   |  16   | 5E-4  | 1.8076 |             300W-WFLW-42dot              |
+|  005  |  120   |  32   | 5E-4  | 1.7809 |             300W-WFLW-42dot              |
+|  006  |  120   |  64   | 5E-4  | 1.7903 |             300W-WFLW-42dot              |
+|  007  |  120   |  128  | 5E-4  | 1.7538 |             300W-WFLW-42dot              |
+|  013  |  120   |  256  | 5E-4  | 1.7726 |             300W-WFLW-42dot              |
+|  008  |  120   |  16   | 5E-4  | 1.8249 |           300W-WFLW-42dot-ReLu           |
+|  009  |  120   |  32   | 5E-4  | 1.7997 |           300W-WFLW-42dot-ReLu           |
+|  010  |  120   |  64   | 5E-4  | 1.8086 |           300W-WFLW-42dot-ReLu           |
+|  011  |  120   |  128  | 5E-4  | 1.7981 |           300W-WFLW-42dot-ReLu           |
+|  012  |  120   |  256  | 5E-4  | 1.7819 |           300W-WFLW-42dot-ReLu           |
+|  015  |  120   |  256  | 5E-4  | 1.7819 |         300W-WFLW-42dot-ITG-ReLu         |
+|  016  |  120   |  256  | 5E-4  | 1.7726 |        300W-WFLW-42dot-ITG-PReLu         |
+|  000  |  120   |  256  | 5E-4  | 1.9700 |        300W-WFLW-42dot-REGR-ReLu         |
+|  181  |  120   |  256  | 5E-4  | 1.9469 |      300W-WFLW-42dot-PHA-REGR-ReLu       |
 |  184  |  120   |  256  | 5E-4  | 1.8799 | 300W-WFLW-42dot-PHA-REGR-ReLu-RegnetX800 |
+|  200  |  120   |  256  | 5E-4  | - | 300W-WFLW-42dot-PHAv3-REGR-ReLu-RegnetX800 |
 
 
 ### References

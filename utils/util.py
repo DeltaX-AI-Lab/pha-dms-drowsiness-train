@@ -85,14 +85,13 @@ def write_experiment_results_storage(args, nme, nme_onnx, csv_file_name="storage
     current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
     # Define the CSV file's headers
-    headers = ['exp', 'nme', 'nme-onnx', 'date-time', 'depth']
+    headers = ['exp', 'nme', 'nme-onnx', 'date-time']
     
     csv_results = {
         "exp":       str(exp).zfill(3),
         "nme":       str(nme),
         "nme-onnx":  str(nme_onnx),
         'date-time': str(current_datetime),
-        'depth':     str(args.depth),
     }
 
     # Check if the file already exists
