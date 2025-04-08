@@ -1,10 +1,9 @@
-# PIPNet: Pixel-in-Pixel Net
-
-## Pixel-in-Pixel Net: Towards Efficient Facial Landmark Detection in the Wild
+# PHA Drowsiness Eye Landmarks Detection
 
 ### Notes
 * Used datasets are `300W` or `300W+WFLW` + `42dot` + `PHA`
-* Download datasets: /home/max/DELTAX_PROJECTS/pha-dms-drowsiness-train/datasets
+* If you don't want to preprocess data from scratch then download datasets by this path:
+  * ```hippo:/home/max/DELTAX_PROJECTS/pha-dms-drowsiness-train/datasets```
 * Trained was runed on 4 GPUs (be careful with accumulation)
 * Train code was modified to detect only eye landmarks, but it can be easily returned to the default version
 
@@ -22,8 +21,8 @@
 ### Conda Env Installation
 
 ```bash
-conda create --name PIPNet python=3.11 -y
-conda activate PIPNet
+conda create --name PHA python=3.11 -y
+conda activate PHA
 pip install opencv-python timm onnx onnxruntime-gpu onnx-simplifier onnxoptimizer scipy matplotlib PyYAML tqdm loguru icecream
 ```
 
