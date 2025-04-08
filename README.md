@@ -104,7 +104,7 @@ python main.py --test --test-onnx --exp <expID|PATH.pt>
 |  000  |  120   |  256  | 5E-4  | 1.9700 |        300W-WFLW-42dot-REGR-ReLu         |
 |  181  |  120   |  256  | 5E-4  | 1.9469 |      300W-WFLW-42dot-PHA-REGR-ReLu       |
 |  184  |  120   |  256  | 5E-4  | 1.8799 | 300W-WFLW-42dot-PHA-REGR-ReLu-RegnetX800 |
-|  200  |  120   |  256  | 5E-4  | - | 300W-WFLW-42dot-PHAv3-REGR-ReLu-RegnetX800 |
+|  200  |  120   |  256  | 5E-4  | 1.9246 | 300W-WFLW-42dot-PHAv3-REGR-ReLu-RegnetX800 |
 
 
 ### References
